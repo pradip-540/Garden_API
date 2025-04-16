@@ -1,16 +1,8 @@
 const express = require('express');
 const mysql = require('mysql2');
-
 const app = express();
 app.use(express.json()); 
 
-// const db = mysql.createConnection({
-//   host: 'sql108.infinityfree.com',
-//   user: 'if0_38746181',
-//   password: 'igJlcueUkcLUW',
-//   database: 'if0_38746181_deliverydata',
-//   port: 3306
-// });
 const db = mysql.createConnection({
   host: 'sql12.freesqldatabase.com',
   user: 'sql12773410',
@@ -40,8 +32,6 @@ app.get('/permission', (req, res) => {
 });
 
 app.post('/addpermission', (req, res) => {
-
-
   const { name, description } = req.body;
   db.query('INSERT INTO Permissions (name, description) VALUES (?, ?)', [name, description], (err, results) => {
     if (err) {
@@ -52,7 +42,6 @@ app.post('/addpermission', (req, res) => {
     }
   }); 
 });     
-
-const port = process.env.PORT || 5000;app.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
