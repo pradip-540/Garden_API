@@ -28,7 +28,7 @@ db.connect(err => {
   console.log('Connected to MySQL database');
 });
 
-app.get('/permissions', (req, res) => {
+app.get('/permission', (req, res) => {
   db.query('SELECT * FROM Permissions', (err, results) => {
     if (err) {
       console.error('Error fetching data:', err.stack);
