@@ -39,7 +39,20 @@ app.get('/permission', (req, res) => {
   });
 });
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
+app.post('/addpermission', (req, res) => {
+
+
+  const { name, description } = req.body;
+  db.query('INSERT INTO Permissions (name, description) VALUES (?, ?)', [name, description], (err, results) => {
+    if (err) {
+      console.error('Error inserting data:', err.stack);
+      res.status(500).send('Error inserting data');
+    } else {
+      res.json({"success":true, "message": "Permission added successfully"}); 
+    }
+  }); 
+});     
+
+const port = process.env.PORT || 5000;app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
